@@ -1,0 +1,1 @@
+print(not ("Mario" == "Cool Guy")) # Should print True
