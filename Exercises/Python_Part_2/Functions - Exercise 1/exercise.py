@@ -1,3 +1,5 @@
-___ ____():
-    print(___)
-    
+def good_bye():
+    print('good bye')
+
+
+
