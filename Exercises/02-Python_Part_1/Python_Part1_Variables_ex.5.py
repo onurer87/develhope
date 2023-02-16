@@ -1,2 +1,4 @@
-##Ex.5
-set_of_3_variables = [True,True,True]
+##Ex.5 rev
+var1=True
+var2=True
+var3=True

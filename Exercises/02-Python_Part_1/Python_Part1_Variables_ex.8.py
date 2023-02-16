@@ -1,3 +1,5 @@
 ##Ex.8
-variable_list= ['value1',True,12334]
-print(variable_list)
+var1='value1'
+var2=True
+var3=12334
+print(var1, var2, var3)
