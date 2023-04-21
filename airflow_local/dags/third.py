@@ -26,6 +26,24 @@ def get_data(**kwargs):
             json.dump(data,outfile)
     except:
         pass
+
+
+def clean_market_data():
+    read_path="/opt/data/DATA_CENTER/DATA_LAKE"
+    ticker="IBM"
+    latest = np.max([float(file.split("_")[-1]) for file in os.listdir(read_path)if ticker in file])
+    latest_file = [file for file in os.listdir(read_path) if str(latest)in file][0]
+
+    output_path="/opt/data/DATA_CENTER/CLEAN_DATA"
+    file=open(read_path+latest_file)
+    data=json.load(file)#read from somewhere #we will read the json from our raw datalake
+    clean_data=pd.DataFrame(data['Time Series (5min)']).T
+    clean_data['ticker']= data['Meta Data']['2. Symbol']
+    clean_data['meta_data']=str(data['Meta Data'])
+    clean_data['timestamp']= pd.to_datetime('now')
+
+    #we will want to store the result in the clean data lake
+    clean_data.to_csv(output_path+"IBM_snapshot_intraday_"+str(pd.to_datetime('now'))+'.csv')
 # create the DAG which calls the python logic that you had created above
 default_dag_args = { 
     'start_date': datetime(2022, 9, 1), 
